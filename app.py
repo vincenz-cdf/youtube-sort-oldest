@@ -1,8 +1,13 @@
 from flask import Flask, render_template, url_for, request
 import googleapiclient.discovery
 import googleapiclient.errors
+from datetime import datetime
 
 app = Flask(__name__)
+
+def convert_date(date_string):
+    date_obj = datetime.strptime(date_string, '%Y-%m-%dT%H:%M:%SZ')
+    return date_obj.strftime('%d-%m-%Y %H:%M:%S')
 
 def get_channel_id(api_key, channel_name_or_custom_url):
     youtube = googleapiclient.discovery.build("youtube", "v3", developerKey=api_key)
@@ -63,8 +68,9 @@ def get_video_titles_and_urls(videos):
 
     for video in videos:
         video_title = video["snippet"]["title"]
-        video_url = f"https://www.youtube.com/watch?v={video['snippet']['resourceId']['videoId']}"
-        video_data.append({"title": video_title, "url": video_url})
+        video_url = video['snippet']['resourceId']['videoId']
+        video_publishedAt = convert_date(video["snippet"]["publishedAt"])
+        video_data.append({"title": video_title, "url": video_url, "publishedAt": video_publishedAt})
 
     return video_data
 

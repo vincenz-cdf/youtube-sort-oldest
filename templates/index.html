@@ -17,7 +17,10 @@
         <ul class="video-list">
             {% for video in video_data %}
             <li>
-                <a href="{{ video.url }}" target="_blank">{{ video.title }}</a>
+                <img src="https://img.youtube.com/vi/{{ video.url }}/default.jpg" alt="Thumbnail" class="thumbnail">
+                <a href="https://www.youtube.com/watch?v={{ video.url }}" target="_blank">{{ video.title }}</a>
+                <br>
+                <span>{{ video.publishedAt }}</span>
             </li>
             {% endfor %}
         </ul>
