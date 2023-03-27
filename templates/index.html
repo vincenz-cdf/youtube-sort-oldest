@@ -1,44 +1,27 @@
-<html> 
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		
-		<link rel="stylesheet" type="text/css" href="../static/index.css"> 
-
-
-
-
-	</head>
-	
-	<body>
-
-        <form class="grid" action="/result" method="POST">
-           
-          <label for="name">Enter the channel name or id:</label>
-          <input type="text" id="name" name="name">
-
-          <center><input class="file_submit" type="Submit"></center>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/index.css">
+</head>
+<body>
+    <main>
+        <form class="form-container" action="/result" method="POST">
+            <h2>Enter the YouTube Channel Name or ID</h2>
+            <input type="text" id="name" name="name" placeholder="Channel name or ID">
+            <button type="submit">Submit</button>
         </form>
-
-        
-
-        
-
-        
-        <br>
-        <br>
-        <br>
-
         {% if video_data %}
-        <ul>
-          {% for video in video_data %}
-            <a href="{{ video.url }}" target="_blank"><li>{{ video.title }}</li></a>
-          {% endfor %}
+        <ul class="video-list">
+            {% for video in video_data %}
+            <li>
+                <a href="{{ video.url }}" target="_blank">{{ video.title }}</a>
+            </li>
+            {% endfor %}
         </ul>
-      {% endif %}
-
-
-
-    </body>
-
+        {% endif %}
+    </main>
+</body>
 </html>
