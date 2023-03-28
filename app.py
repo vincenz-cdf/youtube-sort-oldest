@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 def convert_date(date_string):
     date_obj = datetime.strptime(date_string, '%Y-%m-%dT%H:%M:%SZ')
-    return date_obj.strftime('%d-%m-%Y %H:%M:%S')
+    return date_obj.strftime('%d/%m/%Y')
 
 def get_channel_id(api_key, channel_name_or_custom_url):
     youtube = googleapiclient.discovery.build("youtube", "v3", developerKey=api_key)
