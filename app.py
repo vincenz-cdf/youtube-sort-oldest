@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, request
 import googleapiclient.discovery
 import googleapiclient.errors
 from datetime import datetime
+import os
 
 app = Flask(__name__)
 
@@ -85,7 +86,7 @@ def result():
     print(output)
     name = output["name"]
 
-    api_key = "AIzaSyDyaLoyoR_Hlnja0akVPGXORsC8kuFe3A0"
+    api_key = os.environ.get("API_KEY")
     channel_id = get_channel_id(api_key, name)
 
     if channel_id:
